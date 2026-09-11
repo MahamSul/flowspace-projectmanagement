@@ -92,7 +92,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const member = useCallback(
-    (id: string) => seedMembers.find((m) => m.id === id) ?? seedMembers[0],
+    (id: string): Member => (seedMembers.find((m) => m.id === id) ?? seedMembers[0]) as Member,
     [],
   );
 
