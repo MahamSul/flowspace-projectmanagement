@@ -28,8 +28,8 @@ export const Route = createFileRoute("/team")({
   component: TeamPage,
 });
 
-function loadTone(w: number) {
-  return w > 100 ? "danger" : w > 85 ? "warning" : w < 50 ? "info" : "success";
+function loadTone(w: number): "danger" | "warning" | "accent" | "success" {
+  return w > 100 ? "danger" : w > 85 ? "warning" : w < 50 ? "accent" : "success";
 }
 
 function TeamPage() {
