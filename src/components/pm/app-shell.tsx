@@ -303,7 +303,7 @@ export function PageHeader({
 }
 
 export function AppShell({ children }: { children: ReactNode }) {
-  const { authed } = useStore();
+  const { authed, authReady } = useStore();
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -313,10 +313,13 @@ export function AppShell({ children }: { children: ReactNode }) {
   }, [pathname]);
 
   useEffect(() => {
-    if (!authed) navigate({ to: "/" });
-  }, [authed, navigate]);
+    if (authReady && !authed) navigate({ to: "/" });
+  }, [authed, authReady, navigate]);
 
   if (!authed) {
+    if (!authReady) {
+      return <div className="min-h-screen bg-background" />;
+    }
     return (
       <div className="grid min-h-screen place-items-center bg-background px-6 text-center">
         <div>

@@ -10,13 +10,30 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ActivityRouteImport } from './routes/activity'
+import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as ReportsRouteImport } from './routes/reports'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as TasksRouteImport } from './routes/tasks'
+import { Route as TeamRouteImport } from './routes/team'
+import { Route as WorkloadRouteImport } from './routes/workload'
 import { Route as ProjectsIndexRouteImport } from './routes/projects.index'
+import { Route as ProjectsProjectIdRouteImport } from './routes/projects.$projectId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ActivityRoute = ActivityRouteImport.update({
+  id: '/activity',
+  path: '/activity',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CalendarRoute = CalendarRouteImport.update({
+  id: '/calendar',
+  path: '/calendar',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -24,9 +41,29 @@ const DashboardRoute = DashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReportsRoute = ReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TasksRoute = TasksRouteImport.update({
   id: '/tasks',
   path: '/tasks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeamRoute = TeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WorkloadRoute = WorkloadRouteImport.update({
+  id: '/workload',
+  path: '/workload',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
@@ -34,38 +71,105 @@ const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
   path: '/projects/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProjectsProjectIdRoute = ProjectsProjectIdRouteImport.update({
+  id: '/projects/$projectId',
+  path: '/projects/$projectId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/activity': typeof ActivityRoute
+  '/calendar': typeof CalendarRoute
   '/dashboard': typeof DashboardRoute
+  '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
   '/tasks': typeof TasksRoute
+  '/team': typeof TeamRoute
+  '/workload': typeof WorkloadRoute
+  '/projects/$projectId': typeof ProjectsProjectIdRoute
   '/projects/': typeof ProjectsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/activity': typeof ActivityRoute
+  '/calendar': typeof CalendarRoute
   '/dashboard': typeof DashboardRoute
+  '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
   '/tasks': typeof TasksRoute
+  '/team': typeof TeamRoute
+  '/workload': typeof WorkloadRoute
+  '/projects/$projectId': typeof ProjectsProjectIdRoute
   '/projects': typeof ProjectsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/activity': typeof ActivityRoute
+  '/calendar': typeof CalendarRoute
   '/dashboard': typeof DashboardRoute
+  '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
   '/tasks': typeof TasksRoute
+  '/team': typeof TeamRoute
+  '/workload': typeof WorkloadRoute
+  '/projects/$projectId': typeof ProjectsProjectIdRoute
   '/projects/': typeof ProjectsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/tasks' | '/projects/'
+  fullPaths:
+    | '/'
+    | '/activity'
+    | '/calendar'
+    | '/dashboard'
+    | '/reports'
+    | '/settings'
+    | '/tasks'
+    | '/team'
+    | '/workload'
+    | '/projects/$projectId'
+    | '/projects/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/tasks' | '/projects'
-  id: '__root__' | '/' | '/dashboard' | '/tasks' | '/projects/'
+  to:
+    | '/'
+    | '/activity'
+    | '/calendar'
+    | '/dashboard'
+    | '/reports'
+    | '/settings'
+    | '/tasks'
+    | '/team'
+    | '/workload'
+    | '/projects/$projectId'
+    | '/projects'
+  id:
+    | '__root__'
+    | '/'
+    | '/activity'
+    | '/calendar'
+    | '/dashboard'
+    | '/reports'
+    | '/settings'
+    | '/tasks'
+    | '/team'
+    | '/workload'
+    | '/projects/$projectId'
+    | '/projects/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ActivityRoute: typeof ActivityRoute
+  CalendarRoute: typeof CalendarRoute
   DashboardRoute: typeof DashboardRoute
+  ReportsRoute: typeof ReportsRoute
+  SettingsRoute: typeof SettingsRoute
   TasksRoute: typeof TasksRoute
+  TeamRoute: typeof TeamRoute
+  WorkloadRoute: typeof WorkloadRoute
+  ProjectsProjectIdRoute: typeof ProjectsProjectIdRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
 }
 
@@ -78,11 +182,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/activity': {
+      id: '/activity'
+      path: '/activity'
+      fullPath: '/activity'
+      preLoaderRoute: typeof ActivityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calendar': {
+      id: '/calendar'
+      path: '/calendar'
+      fullPath: '/calendar'
+      preLoaderRoute: typeof CalendarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard': {
       id: '/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reports': {
+      id: '/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tasks': {
@@ -92,6 +224,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TasksRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/team': {
+      id: '/team'
+      path: '/team'
+      fullPath: '/team'
+      preLoaderRoute: typeof TeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/workload': {
+      id: '/workload'
+      path: '/workload'
+      fullPath: '/workload'
+      preLoaderRoute: typeof WorkloadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/projects/': {
       id: '/projects/'
       path: '/projects'
@@ -99,13 +245,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/projects/$projectId': {
+      id: '/projects/$projectId'
+      path: '/projects/$projectId'
+      fullPath: '/projects/$projectId'
+      preLoaderRoute: typeof ProjectsProjectIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ActivityRoute: ActivityRoute,
+  CalendarRoute: CalendarRoute,
   DashboardRoute: DashboardRoute,
+  ReportsRoute: ReportsRoute,
+  SettingsRoute: SettingsRoute,
   TasksRoute: TasksRoute,
+  TeamRoute: TeamRoute,
+  WorkloadRoute: WorkloadRoute,
+  ProjectsProjectIdRoute: ProjectsProjectIdRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,
 }
 export const routeTree = rootRouteImport
