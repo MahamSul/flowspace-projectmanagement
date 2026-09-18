@@ -71,6 +71,7 @@ const StoreContext = createContext<StoreValue | null>(null);
 
 export function StoreProvider({ children }: { children: ReactNode }) {
   const [authed, setAuthed] = useState(false);
+  const [authReady, setAuthReady] = useState(false);
   const [projects, setProjects] = useState<Project[]>(seedProjects);
   const [tasks, setTasks] = useState<Task[]>(seedTasks);
   const [activity, setActivity] = useState<ActivityItem[]>(seedActivity);
@@ -80,6 +81,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     if (typeof window !== "undefined" && window.localStorage.getItem(AUTH_KEY) === "1") {
       setAuthed(true);
     }
+    setAuthReady(true);
   }, []);
 
   const signIn = useCallback(() => {
@@ -107,6 +109,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const value = useMemo<StoreValue>(
     () => ({
       authed,
+      authReady,
       signIn,
       signOut,
       members: seedMembers,
@@ -239,7 +242,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       toggleMilestone: (id) =>
         setMilestones((prev) => prev.map((m) => (m.id === id ? { ...m, done: !m.done } : m))),
     }),
-    [authed, signIn, signOut, projects, tasks, activity, milestones, member, pushActivity],
+    [authed, authReady, signIn, signOut, projects, tasks, activity, milestones, member, pushActivity],
   );
 
   return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>;
