@@ -61,7 +61,9 @@ function Toggle({
   );
 }
 
-const DEFAULT_STATUSES = [
+type StatusTone = "muted" | "info" | "primary" | "warning" | "danger" | "success" | "accent";
+
+const DEFAULT_STATUSES: { name: string; tone: StatusTone }[] = [
   { name: "Backlog", tone: "muted" as const },
   { name: "To Do", tone: "info" as const },
   { name: "In Progress", tone: "primary" as const },

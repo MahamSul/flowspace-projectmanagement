@@ -14,6 +14,7 @@ import { Route as ActivityRouteImport } from './routes/activity'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ReportsRouteImport } from './routes/reports'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as TasksRouteImport } from './routes/tasks'
 import { Route as TeamRouteImport } from './routes/team'
 import { Route as WorkloadRouteImport } from './routes/workload'
@@ -43,6 +44,11 @@ const DashboardRoute = DashboardRouteImport.update({
 const ReportsRoute = ReportsRouteImport.update({
   id: '/reports',
   path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TasksRoute = TasksRouteImport.update({
@@ -77,6 +83,7 @@ export interface FileRoutesByFullPath {
   '/calendar': typeof CalendarRoute
   '/dashboard': typeof DashboardRoute
   '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
   '/tasks': typeof TasksRoute
   '/team': typeof TeamRoute
   '/workload': typeof WorkloadRoute
@@ -89,6 +96,7 @@ export interface FileRoutesByTo {
   '/calendar': typeof CalendarRoute
   '/dashboard': typeof DashboardRoute
   '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
   '/tasks': typeof TasksRoute
   '/team': typeof TeamRoute
   '/workload': typeof WorkloadRoute
@@ -102,6 +110,7 @@ export interface FileRoutesById {
   '/calendar': typeof CalendarRoute
   '/dashboard': typeof DashboardRoute
   '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
   '/tasks': typeof TasksRoute
   '/team': typeof TeamRoute
   '/workload': typeof WorkloadRoute
@@ -116,6 +125,7 @@ export interface FileRouteTypes {
     | '/calendar'
     | '/dashboard'
     | '/reports'
+    | '/settings'
     | '/tasks'
     | '/team'
     | '/workload'
@@ -128,6 +138,7 @@ export interface FileRouteTypes {
     | '/calendar'
     | '/dashboard'
     | '/reports'
+    | '/settings'
     | '/tasks'
     | '/team'
     | '/workload'
@@ -140,6 +151,7 @@ export interface FileRouteTypes {
     | '/calendar'
     | '/dashboard'
     | '/reports'
+    | '/settings'
     | '/tasks'
     | '/team'
     | '/workload'
@@ -153,6 +165,7 @@ export interface RootRouteChildren {
   CalendarRoute: typeof CalendarRoute
   DashboardRoute: typeof DashboardRoute
   ReportsRoute: typeof ReportsRoute
+  SettingsRoute: typeof SettingsRoute
   TasksRoute: typeof TasksRoute
   TeamRoute: typeof TeamRoute
   WorkloadRoute: typeof WorkloadRoute
@@ -195,6 +208,13 @@ declare module '@tanstack/react-router' {
       path: '/reports'
       fullPath: '/reports'
       preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tasks': {
@@ -241,6 +261,7 @@ const rootRouteChildren: RootRouteChildren = {
   CalendarRoute: CalendarRoute,
   DashboardRoute: DashboardRoute,
   ReportsRoute: ReportsRoute,
+  SettingsRoute: SettingsRoute,
   TasksRoute: TasksRoute,
   TeamRoute: TeamRoute,
   WorkloadRoute: WorkloadRoute,
