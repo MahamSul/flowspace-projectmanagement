@@ -47,6 +47,7 @@ interface NewProjectInput {
 
 interface StoreValue {
   authed: boolean;
+  authReady: boolean;
   signIn: () => void;
   signOut: () => void;
   members: Member[];
